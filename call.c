@@ -1,8 +1,10 @@
+/*include the libraries*/
 #include <stdio.h>
 
 /*function declaration*/
 int max(int num1, int num2);
 
+/*main part of the program*/
 int main()
 {
     /*local variable definition*/
@@ -12,17 +14,20 @@ int main()
 
     /*calling a function to get max value*/
     ret = max(a, b);
-    printf("Max value is : %d\n", ret);
+
+    /*print the max value*/
+    printf("max value is :  %d\n", ret);
+
     return 0;
 }
 
-/*function returning the max betweem two numbers*/
+/*function returning the max between two numbers*/
 int max(int num1, int num2)
 {
-    /*local variable delararion*/
+    /*local variable declaration*/
     int result;
 
-    if (num1 > num2)
+    if(num1 > num2)
         result = num1;
     else
         result = num2;
