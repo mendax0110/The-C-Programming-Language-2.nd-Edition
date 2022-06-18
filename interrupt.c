@@ -1,26 +1,29 @@
-#define F_CPU   12000000UL      //freqency
-#include <avr/io.h>             //I/O declarations
-#include <avr/interrupt.h>      //Interrupt declarations
+/*define the frequency of the interrupt*/
+#define F_CPU 12000000UL
+/*include the libraries for I/O and interrupt declarations*/
+#include <avr/io.h>
+#include <avr/interrupt.h>
 
+/*main part of the program*/
 int main(void)
 {
-    DDRC  = 0xFF;    //set DDRC as an Output
-    PORTC = 0x00;   //shutdown all LED's
+    DDRC    = 0xFF;     /*set DDRC as an OUTPUT*/
+    PORTC   = 0x00;     /*shutdown all LED's*/
 
-    DDRD  = 0x00;    //set DDRD as an Input
-    PORTD = 0xFF;   //active pull-ups
+    DDRD    = 0x00;     /*set DDRD as an INPUT*/
+    PORTD   = 0xFF;     /*pull-up resistor on PD0-PD7*/
 
-    //Interrupt Register
-    MCUCR |= (1 << ISC11);  //Interrupt INT1 in MCUCR(set flag)
-    GICR  |= (1 << INT1);   //Interrupt INT1 set
+    /*interrupt register*/
+    MCUCR   |= (1 << ISC11);    /*interrupt INT1 in MCUCR(set flag)*/
+    GICR    |= (1 << INT1);     /*interrupt INT1 in GICR(enable)*/
 
-    //global Interrupt set 
-    while (1)
+    /*global interrupt set*/
+    while(1)
     {
-        if (GIFR & (1 << INTF1))    //when INTF1 is zero
+        if(GIFR & (1 << INTF1))     /*when INFT1 is zero*/
         {
-            PORTC++;                //Output(PORTC) more than 1
-            GIFR = (1 << INTF1);    //INTF1 Flag RS
+            PORTC++;                /*OUTPUT PORTC more than 1*/
+            GIFR = (1 << INTF 1);   /*INTF1 flag is RESET*/
         }
     }
 }
